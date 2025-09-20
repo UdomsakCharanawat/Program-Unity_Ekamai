@@ -1,0 +1,212 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+public class PlayerFollowLine : MonoBehaviour
+{
+    public LineRenderer fullLine;     
+    public LineRenderer progressLine; 
+    public Transform[] points;         
+    public Transform player;           
+
+    [Header("Colors")]
+    public Color fullLineColor = Color.gray;
+    public Color progressLineColor = Color.green;
+
+    [Header("Timing")]
+    public float totalTime = 10f; 
+
+    private float totalDistance;
+    private int currentIndex = 0; 
+
+    private float traveledDistance = 0f;
+    private Vector3 lastPosition;
+    private float distancePerPercent;
+    private int batteryStep = 0;
+    private Quaternion initialRotation;
+
+    [Header("Distance")]
+    public float routeDistanceKm = 8.6f; 
+    public panelSiamSquare _panelSiamSquare;
+
+    public select _select;
+    public gameManager _gameManager;
+
+
+    public void OnEnable()
+    {
+        if (_gameManager == null)
+        {
+            _gameManager = GameObject.Find("gameManager").GetComponent<gameManager>();
+        }
+
+        initialRotation = player.rotation;
+        lastPosition = player.position;
+
+        _panelSiamSquare.text_km[0].text = $"{routeDistanceKm}";
+        _panelSiamSquare.text_km[1].text = $"{routeDistanceKm}";
+    }
+
+    public void OnDisable()
+    {
+        if (points != null && points.Length > 0)
+        {
+            player.position = points[0].position;
+            lastPosition = player.position;
+
+            player.rotation = initialRotation;
+        }
+
+        currentIndex = 0;
+        traveledDistance = 0f;
+        batteryStep = 0;
+
+        if (_gameManager != null)
+        {
+            _gameManager.running = false;
+            _gameManager.run_ontheway = false;
+        }
+
+        if (_select != null && _select.panelDone != null && _select.panelDone.gameObject != null)
+        {
+            if (_select.panelDone.activeSelf)
+            {
+                _select.panelDone.SetActive(false);
+            }
+        }
+
+        if (progressLine != null && points != null && points.Length > 0)
+        {
+            progressLine.positionCount = 2;
+            progressLine.SetPosition(0, points[0].position);
+            progressLine.SetPosition(1, points[0].position);
+        }
+    }
+
+    private void Start()
+    {
+        fullLine.positionCount = points.Length;
+        fullLine.startColor = fullLineColor;
+        fullLine.endColor = fullLineColor;
+        for (int i = 0; i < points.Length; i++)
+        {
+            fullLine.SetPosition(i, points[i].position);
+        }
+
+        progressLine.startColor = progressLineColor;
+        progressLine.endColor = progressLineColor;
+        totalDistance = 0f;
+
+        for (int i = 0; i < points.Length - 1; i++)
+        {
+            totalDistance += Vector3.Distance(points[i].position, points[i + 1].position);
+        }
+
+        player.position = points[0].position; 
+        lastPosition = player.position;
+
+        float batteryUsage = _gameManager.persenRunRoute[_gameManager.orderSelectedRoute]; // 2%
+        distancePerPercent = totalDistance / batteryUsage;
+    }
+
+    private void Update()
+    {
+        if (_gameManager.running)
+        {
+            MovePlayer();
+        }
+
+        UpdateProgressLine();
+    }
+
+    void MovePlayer()
+    {
+        if (currentIndex >= points.Length - 1) return;
+
+        Vector3 start = points[currentIndex].position;
+        Vector3 target = points[currentIndex + 1].position;
+
+        float speed = totalDistance / totalTime;
+
+       if(_gameManager.persenBattery > 20) player.position = Vector3.MoveTowards(player.position, target, speed * Time.deltaTime);
+
+        float traveledKm = (traveledDistance / totalDistance) * routeDistanceKm;
+        float remainingKm = Mathf.Max(routeDistanceKm - traveledKm, 0f);
+        int roundedKm = Mathf.RoundToInt(remainingKm);
+
+        _panelSiamSquare.text_km[0].text = $"{roundedKm}";
+        _panelSiamSquare.text_km[1].text = $"{roundedKm}";
+
+        float delta = Vector3.Distance(player.position, lastPosition);
+        traveledDistance += delta;
+        lastPosition = player.position;
+
+        int expectedStep = Mathf.FloorToInt(traveledDistance / distancePerPercent);
+        if (expectedStep > batteryStep)
+        {
+            int stepsToReduce = expectedStep - batteryStep;
+            _gameManager.persenBattery -= stepsToReduce;
+            batteryStep = expectedStep;
+        }
+
+
+        Vector3 moveDir = (target - player.position).normalized;
+        if (moveDir != Vector3.zero)
+        {
+            float angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
+            player.rotation = Quaternion.Euler(0, 0, angle - 90f);
+        }
+
+        if (Vector3.Distance(player.position, target) < 0.01f)
+        {
+            currentIndex++;
+            //Debug.Log(currentIndex);
+            if (currentIndex >= points.Length - 1)
+            {
+                _gameManager.running = false;
+                _gameManager.run_ontheway = false;
+
+                _gameManager.persenBattery -= 1;
+
+                _select.batteryDone_en.GetComponent<Text>().text = _gameManager.persenBattery.ToString() + "%";
+                _select.batteryDone_th.GetComponent<Text>().text = _gameManager.persenBattery.ToString() + "%";
+                _select.panelDone.SetActive(true);
+
+                _panelSiamSquare.text_km[0].text = $"0";
+                _panelSiamSquare.text_km[1].text = $"0";
+
+            }
+        }
+    }
+
+    void UpdateProgressLine()
+    {
+        Vector3 playerPos = player.position;
+
+        int closestIndex = 0;
+        float minDist = float.MaxValue;
+        for (int i = 0; i < points.Length - 1; i++)
+        {
+            float dist = DistancePointToLineSegment(playerPos, points[i].position, points[i + 1].position);
+            if (dist < minDist)
+            {
+                minDist = dist;
+                closestIndex = i;
+            }
+        }
+
+        progressLine.positionCount = closestIndex + 2;
+        for (int i = 0; i <= closestIndex; i++)
+            progressLine.SetPosition(i, points[i].position);
+
+        progressLine.SetPosition(closestIndex + 1, playerPos);
+    }
+
+    float DistancePointToLineSegment(Vector3 p, Vector3 a, Vector3 b)
+    {
+        Vector3 ap = p - a;
+        Vector3 ab = b - a;
+        float t = Mathf.Clamp01(Vector3.Dot(ap, ab) / ab.sqrMagnitude);
+        Vector3 closest = a + t * ab;
+        return Vector3.Distance(p, closest);
+    }
+}
