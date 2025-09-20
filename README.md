@@ -16,3 +16,10 @@ Game Satellite - เกมทดลองซ่อมยานอวกาศ
 <img width="1920" height="1080" alt="Screenshot 2025-09-20 215345" src="https://github.com/user-attachments/assets/cc59df86-6efc-43b8-bded-e685e946fd72" />
 
 ---------------------
+
+Game Car EV - เกมจำลองการใช้แบตของรถยนตร์ไฟฟ้า
+
+![Image Sequence_005_0000](https://github.com/user-attachments/assets/ec5bc321-6089-4dd6-b372-7699a0abf973)
+
+---------------------
+
