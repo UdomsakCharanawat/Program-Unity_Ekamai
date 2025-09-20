@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
-public class dronePlayerFire : MonoBehaviour
+public class playerController : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float horizontalForce = 10f;
