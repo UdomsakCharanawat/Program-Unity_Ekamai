@@ -21,6 +21,17 @@ Game Satellite - เกมทดลองซ่อมยานอวกาศ
 
 ---------------------
 
+Application IOT - จำลองการเปิด/ปิดไฟบ้านผ่าน Application Tablet โดยสามารถตั้งเวลาเปิด/ปิดได้
+
+วิดีโอ -> [https://drive.google.com/file/d/1oeTjQgA97YaWDlU-u1Fzn_sZK-EnwezB/view?usp=sharing](https://drive.google.com/file/d/1oeTjQgA97YaWDlU-u1Fzn_sZK-EnwezB/view?usp=sharing)
+
+[Google Drive](https://drive.google.com/drive/folders/1Z8jT0jsbX1V1XocCVgOhCe1nwo8WqxLl?usp=sharing)
+
+<img width="1219" height="779" alt="image" src="https://github.com/user-attachments/assets/4d069265-a7f1-469b-baf4-ed7f30d41551" />
+
+
+---------------------
+
 Game Car EV - เกมจำลองการใช้แบตของรถยนตร์ไฟฟ้า
 
 วิดีโอ -> [https://drive.google.com/file/d/1ZfmUygo282bHBNnVO7veXyLprbEDvmSM/view?usp=sharing](https://drive.google.com/file/d/1ZRZESwVdUiUxc7u_WhEEEpTEb4Z5NQHA/view?usp=sharing)
@@ -30,4 +41,3 @@ Game Car EV - เกมจำลองการใช้แบตของรถ
 ![Image Sequence_005_0000](https://github.com/user-attachments/assets/ec5bc321-6089-4dd6-b372-7699a0abf973)
 
 ---------------------
-
