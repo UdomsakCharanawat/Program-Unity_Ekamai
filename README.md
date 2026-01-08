@@ -13,7 +13,7 @@ Game Drone - ฝึกควบคุมการบินโดรนในส�
 
 Game Satellite - เกมทดลองซ่อมยานอวกาศ
 
-วิดีโอ -> [https://drive.google.com/file/d/1At8FRaEZn3aFSKNE2FW9i3tILrzIvEnj/view?usp=sharing](https://drive.google.com/file/d/1At8FRaEZn3aFSKNE2FW9i3tILrzIvEnj/view?usp=sharing)
+วิดีโอ -> [https://drive.google.com/file/d/1kowMKc6GhIF89RBfUHv8kHfS03b8LB4U/view?usp=sharing](https://drive.google.com/file/d/1kowMKc6GhIF89RBfUHv8kHfS03b8LB4U/view?usp=sharing)
 
 [Google Drive](https://drive.google.com/drive/folders/11a3DSziU8Qf9HRlPMS8wqOWPx3K0ChYr?usp=sharing)
 
