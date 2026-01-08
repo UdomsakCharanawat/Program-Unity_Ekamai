@@ -13,13 +13,17 @@ Game Drone - ฝึกควบคุมการบินโดรนในส�
 
 Game Satellite - เกมทดลองซ่อมยานอวกาศ
 
-วิดีโอ -> [https://drive.google.com/file/d/1ZfmUygo282bHBNnVO7veXyLprbEDvmSM/view?usp=sharing](https://drive.google.com/file/d/1ZRZESwVdUiUxc7u_WhEEEpTEb4Z5NQHA/view?usp=sharing)
+วิดีโอ -> [https://drive.google.com/file/d/1At8FRaEZn3aFSKNE2FW9i3tILrzIvEnj/view?usp=sharing](https://drive.google.com/file/d/1At8FRaEZn3aFSKNE2FW9i3tILrzIvEnj/view?usp=sharing)
+
+[Google Drive](https://drive.google.com/drive/folders/11a3DSziU8Qf9HRlPMS8wqOWPx3K0ChYr?usp=sharing)
 
 <img width="1920" height="1080" alt="Screenshot 2025-09-20 215345" src="https://github.com/user-attachments/assets/cc59df86-6efc-43b8-bded-e685e946fd72" />
 
 ---------------------
 
 Game Car EV - เกมจำลองการใช้แบตของรถยนตร์ไฟฟ้า
+
+วิดีโอ -> [https://drive.google.com/file/d/1ZfmUygo282bHBNnVO7veXyLprbEDvmSM/view?usp=sharing](https://drive.google.com/file/d/1ZRZESwVdUiUxc7u_WhEEEpTEb4Z5NQHA/view?usp=sharing)
 
 ![Image Sequence_005_0000](https://github.com/user-attachments/assets/ec5bc321-6089-4dd6-b372-7699a0abf973)
 
